@@ -28,6 +28,11 @@ public class ChatMessageDO {
     private Long id;
 
     /**
+     * 用户 id
+     */
+    private Integer userId;
+
+    /**
      * 消息 id
      */
     private String messageId;
@@ -87,6 +92,11 @@ public class ChatMessageDO {
     private ApiTypeEnum apiType;
 
     /**
+     * 模型名称
+     */
+    private String modelName;
+
+    /**
      * ip
      */
     private String ip;
@@ -117,22 +127,27 @@ public class ChatMessageDO {
     /**
      * 输入消息的 tokens
      */
-    private Long promptTokens;
+    private Integer promptTokens;
 
     /**
      * 输出消息的 tokens
      */
-    private Long completionTokens;
+    private Integer completionTokens;
 
     /**
      * 累计 Tokens
      */
-    private Long totalTokens;
+    private Integer totalTokens;
 
     /**
      * 聊天信息状态
      */
     private ChatMessageStatusEnum status;
+
+    /**
+     * 是否被隐藏
+     */
+    private Boolean isHide;
 
     /**
      * 创建时间

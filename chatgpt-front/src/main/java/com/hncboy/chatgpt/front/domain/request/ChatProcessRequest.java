@@ -3,7 +3,7 @@ package com.hncboy.chatgpt.front.domain.request;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
 
 /**
  * @author hncboy
@@ -21,7 +21,6 @@ public class ChatProcessRequest {
     @Schema(title = "配置")
     private Options options;
 
-    @Size(max = 100, message = "系统消息字数范围[0, 2000]")
     @Schema(title = "系统消息")
     private String systemMessage;
 

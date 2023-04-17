@@ -21,7 +21,7 @@ import com.unfbx.chatgpt.entity.chat.Message;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.LinkedList;
 import java.util.Objects;
 
@@ -52,6 +52,7 @@ public class ApiKeyResponseEmitter implements ResponseEmitter {
 
         // 所有消息
         LinkedList<Message> messages = new LinkedList<>();
+        // TODO 需要包含上下文 tokens 计算
         // 添加用户上下文消息
         addContextChatMessage(chatMessageDO, messages);
 
@@ -81,7 +82,7 @@ public class ApiKeyResponseEmitter implements ResponseEmitter {
 
         // 构建事件监听器
         ParsedEventSourceListener parsedEventSourceListener = new ParsedEventSourceListener.Builder()
-                .addListener(new ConsoleStreamListener())
+//                .addListener(new ConsoleStreamListener())
                 .addListener(new ResponseBodyEmitterStreamListener(emitter))
                 .setParser(parser)
                 .setDataStorage(dataStorage)

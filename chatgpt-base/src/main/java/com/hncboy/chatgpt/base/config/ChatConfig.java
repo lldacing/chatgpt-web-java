@@ -23,11 +23,6 @@ import java.util.Objects;
 public class ChatConfig implements InitializingBean {
 
     /**
-     * 密码
-     */
-    private String authSecretKey;
-
-    /**
      * OpenAI API Key - https://beta.openai.com/docs/api-reference/authentication
      */
     private String openaiApiKey;
@@ -99,14 +94,9 @@ public class ChatConfig implements InitializingBean {
     private Integer ipMaxRequestSecond;
 
     /**
-     * 限制上下文对话的问题数量，默认 1 次
+     * 限制上下文对话的问题数量，默认不限制
      */
     private Integer limitQuestionContextCount;
-
-    /**
-     * 是否展示余额，默认不展示
-     */
-    private Boolean isShowBalance;
 
     /**
      * 判断是否有 http 代理
@@ -115,15 +105,6 @@ public class ChatConfig implements InitializingBean {
      */
     public Boolean hasHttpProxy() {
         return StrUtil.isNotBlank(httpProxyHost) && Objects.nonNull(httpProxyPort);
-    }
-
-    /**
-     * 判断是否有鉴权
-     *
-     * @return true/false
-     */
-    public Boolean hasAuth() {
-        return StrUtil.isNotEmpty(getAuthSecretKey());
     }
 
     /**
@@ -181,7 +162,7 @@ public class ChatConfig implements InitializingBean {
      * @return 限制数量
      */
     public Integer getLimitQuestionContextCount() {
-        return Opt.ofNullable(limitQuestionContextCount).orElse(1);
+        return Opt.ofNullable(limitQuestionContextCount).orElse(0);
     }
 
     @Override
@@ -224,7 +205,7 @@ public class ChatConfig implements InitializingBean {
                 return;
             }
 
-            if (!ConversationModelEnum.NAME_MAP.containsKey(openaiApiKey)) {
+            if (!ConversationModelEnum.NAME_MAP.containsKey(openaiApiModel)) {
                 throw new RuntimeException("AccessToken apiModel 填写错误");
             }
         }
